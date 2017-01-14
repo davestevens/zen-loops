@@ -7,7 +7,7 @@ module.exports = {
   devtool: "cheap-module-eval-source-map",
   entry: [
     "webpack/hot/dev-server",
-    "./app/main.js"
+    "./app/main.jsx"
   ],
   output: {
     path: path.join(__dirname, "build"),
@@ -20,9 +20,13 @@ module.exports = {
   ],
   module: {
     loaders: [{
-      test: /\.js?$/,
+      test: /\.jsx?$/,
       loaders: [ "babel" ],
       exclude: /node_modules/,
+      include: __dirname
+    }, {
+      test: /\.scss?$/,
+      loaders: [ "style", "css", "sass" ],
       include: __dirname
     }]
   }

@@ -1,0 +1,123 @@
+.tile {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.3s;
+
+  &--empty {
+  }
+
+  &--end {
+    &:before {
+      display: table;
+      content: "";
+      height: 50%;
+      position: absolute;
+      top: 0;
+      left: calc(50% - 1px);
+      width: 2px;
+      background-color: red;
+    }
+  }
+
+  &--corner {
+    &:before {
+      display: table;
+      content: "";
+      height: 50%;
+      position: absolute;
+      top: 0;
+      left: calc(50% - 1px);
+      width: 2px;
+      background-color: red;
+    }
+
+    &:after {
+      display: table;
+      content: "";
+      width: 50%;
+      position: absolute;
+      top: calc(50% - 1px);
+      left: 50%;
+      height: 2px;
+      background-color: red;
+    }
+  }
+
+  &--straight {
+    &:before {
+      display: table;
+      content: "";
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: calc(50% - 1px);
+      width: 2px;
+      background-color: red;
+    }
+  }
+
+  &--fork {
+    &:before {
+      display: table;
+      content: "";
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: calc(50% - 1px);
+      width: 2px;
+      background-color: red;
+    }
+
+    &:after {
+      display: table;
+      content: "";
+      width: 50%;
+      position: absolute;
+      top: calc(50% - 1px);
+      left: 50%;
+      height: 2px;
+      background-color: red;
+    }
+  }
+
+  &--cross {
+    &:before {
+      display: table;
+      content: "";
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: calc(50% - 1px);
+      width: 2px;
+      background-color: red;
+    }
+
+    &:after {
+      display: table;
+      content: "";
+      width: 100%;
+      position: absolute;
+      top: calc(50% - 1px);
+      left: 0;
+      height: 2px;
+      background-color: red;
+    }
+  }
+
+  &--rotation-0 {
+    transform: rotate(0deg);
+  }
+
+  &--rotation-1 {
+    transform: rotate(90deg);
+  }
+
+  &--rotation-2 {
+    transform: rotate(180deg);
+  }
+
+  &--rotation-3 {
+    transform: rotate(270deg);
+  }
+}
