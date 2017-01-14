@@ -46,17 +46,24 @@ class Grid {
       const space = shuffledSpaces.shift();
       const surrounding = this._surroundingSpaces(space);
       const possibilities = calculatePossibleTiles({ all: tiles, surrounding });
-      this.set(space.x, space.y, randomFromArray(possibilities, rng));
+      const tile = randomFromArray(possibilities, rng);
+
+      this.set(space.x, space.y, tile);
     }
   }
 
   _surroundingSpaces({ x, y }) {
-    return [
-      this.get(x,     y - 1),
-      this.get(x + 1, y    ),
-      this.get(x,     y + 1),
-      this.get(x - 1, y    )
-    ];
+    const value = (x, y) => {
+      const space = this.get(x, y);
+      return space == OUT_OF_BOUNDS ? OUT_OF_BOUNDS : space.value;
+    }
+
+    return {
+      above: value(x,     y - 1),
+      right: value(x + 1, y    ),
+      below: value(x,     y + 1),
+      left:  value(x - 1, y    )
+    };
   }
 }
 

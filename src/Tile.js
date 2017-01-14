@@ -1,7 +1,5 @@
 "use strict";
 
-"use strict";
-
 class Tile {
   constructor({ name, top, right, bottom, left }) {
     this.name = name;
