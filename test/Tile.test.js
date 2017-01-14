@@ -58,6 +58,25 @@ describe("Tile", () => {
         expect(tile.left).to.equal(1);
       });
     });
+
+    context("when rotating all the way round", () => {
+      it("resets to zero", () => {
+        const tile = new Tile({
+          top: 0,
+          right: 1,
+          bottom: 2,
+          left: 3
+        });
+
+        tile.rotation = 4;
+
+        expect(tile.rotation).to.equal(0);
+        expect(tile.top).to.equal(0);
+        expect(tile.right).to.equal(1);
+        expect(tile.bottom).to.equal(2);
+        expect(tile.left).to.equal(3);
+      });
+    });
   });
 
   describe("#clone", () => {

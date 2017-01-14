@@ -10,14 +10,17 @@ class Tile {
   get name() { return this._name; }
   set name(value) { this._name = value; }
 
-  get rotation() { return this._rotation; }
+  get rotation() { return this._rotation || 0; }
   set rotation(value) {
-    this._rotation = (this._rotation || 0) + value;
-    const side = (current) => (((current - this.rotation) % 4) + 4) % 4;
-    this.top = this.sides[ side(0) ];
-    this.right = this.sides[ side(1) ];
-    this.bottom = this.sides[ side(2) ];
-    this.left = this.sides[ side(3) ];
+    const absMod = (value) => {
+      const max = this.sides.length;
+      return ((value % max) + max) % max;
+    }
+    this._rotation = absMod(this.rotation + value);
+    this.top = this.sides[ absMod(0 - this.rotation) ];
+    this.right = this.sides[ absMod(1 - this.rotation) ];
+    this.bottom = this.sides[ absMod(2 - this.rotation) ];
+    this.left = this.sides[ absMod(3 - this.rotation) ];
   }
 
   get top() { return this._top; }
