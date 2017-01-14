@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
-import Space from "../components/Space.jsx";
+import Tile from "../components/Tile.jsx";
 import "./Game.scss";
 
 class Game extends Component {
@@ -26,19 +26,19 @@ class Game extends Component {
   }
 
   _renderTiles() {
-    const { tileSize, spaces } = this.props;
+    const { tileSize, tiles } = this.props;
 
-    return spaces.map(space => {
-      return <Space key={ `space-${ space.x }-${ space.y }` }
-                    size={ tileSize }
-                    { ...space } />;
+    return tiles.map(tile => {
+      return <Tile key={ `tile-${ tile.x }-${ tile.y }` }
+                   size={ tileSize }
+                   { ...tile } />;
     });
   }
 }
 
 Game.propTypes = {
   height: PropTypes.number.isRequired,
-  spaces: PropTypes.array.isRequired,
+  tiles: PropTypes.array.isRequired,
   tileSize: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired
 }
@@ -46,7 +46,7 @@ Game.propTypes = {
 const mapStateToProps = (state) => ({
   width: state.game.width,
   height: state.game.height,
-  spaces: state.game.spaces
+  tiles: state.game.tiles
 });
 
 export default connect(

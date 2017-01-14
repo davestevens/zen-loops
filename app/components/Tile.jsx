@@ -8,7 +8,7 @@ import "./Tile.scss";
 
 class Tile extends Component {
   render() {
-    const { kind, rotation } = this.props;
+    const { kind, rotation, size, x, y } = this.props;
 
     const classnames = classNames(
       "tile",
@@ -18,6 +18,7 @@ class Tile extends Component {
 
     return (
       <div className={ classnames }
+           style={ { top: size * y, left: size * x, width: size, height: size } }
            onClick={ this._rotate.bind(this) }>
       </div>
     );
@@ -38,6 +39,7 @@ Tile.propTypes = {
   dispatch: PropTypes.func.isRequired,
   kind: PropTypes.string.isRequired,
   rotation: PropTypes.number.isRequired,
+  size: PropTypes.number.isRequired,
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired
 }
