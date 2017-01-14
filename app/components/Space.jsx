@@ -7,7 +7,9 @@ import "./Space.scss";
 const Space = ({ size, tile, x, y }) => (
   <div className="space"
        style={ { top: size * y, left: size * x, width: size, height: size } }>
-    <Tile { ...tile } />
+    <Tile { ...tile }
+          x={ x }
+          y={ y } />
   </div>
 );
 

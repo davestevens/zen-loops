@@ -47,7 +47,7 @@ class Grid {
       const possibilities = calculatePossibleTiles({ all: tiles, surrounding });
       const tile = randomFromArray(possibilities, rng);
 
-      this.set(space.x, space.y, tile);
+      this.set(space.x, space.y, tile.clone());
     }
   }
 

@@ -2,14 +2,13 @@
 
 import React from "react";
 import { render } from "react-dom";
-import Game from "./containers/Game.jsx";
+import { Provider } from "react-redux";
+import store from "./stores/configureStore";
+import App from "./containers/App.jsx";
 
 render(
-  <div>
-    <h1>Zen Loops</h1>
-    <Game width={ 8 }
-          height={ 8 }
-          tileSize={ 40 } />
-  </div>,
+  <Provider store={ store }>
+    <App />
+  </Provider>,
   document.getElementById("app")
 );

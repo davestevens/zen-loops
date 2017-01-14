@@ -1,6 +1,8 @@
 "use strict";
 
 import React, { Component, PropTypes } from "react";
+import { connect } from "react-redux";
+import { rotateTile } from "../actions/game";
 import classNames from "classnames";
 import "./Tile.scss";
 
@@ -22,7 +24,8 @@ class Tile extends Component {
   }
 
   _rotate() {
-    console.log("ROTATE");
+    const { dispatch, x, y } = this.props;
+    dispatch(rotateTile(x, y));
   }
 }
 
@@ -32,8 +35,11 @@ Tile.defaultProps = {
 }
 
 Tile.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   kind: PropTypes.string.isRequired,
-  rotation: PropTypes.number.isRequired
+  rotation: PropTypes.number.isRequired,
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired
 }
 
-export default Tile;
+export default connect()(Tile);
