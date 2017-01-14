@@ -41,7 +41,6 @@ class Grid {
 
   fill({ tiles, rng }) {
     let shuffledSpaces = shuffleArray(this.spaces, rng);
-
     while(shuffledSpaces.length) {
       const space = shuffledSpaces.shift();
       const surrounding = this._surroundingSpaces(space);
@@ -50,6 +49,14 @@ class Grid {
 
       this.set(space.x, space.y, tile);
     }
+  }
+
+  shuffle({ rng }) {
+    this.spaces.forEach(space => {
+      if (!space.value) return;
+      const tile = space.value;
+      tile.rotation = Math.floor(rng() * tile.sides.length);
+    });
   }
 
   _surroundingSpaces({ x, y }) {

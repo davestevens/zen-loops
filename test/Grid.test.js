@@ -69,22 +69,46 @@ describe("Grid", () => {
     it("fills the Grid's spaces with random tiles", () => {
       const grid = new Grid({ width: 2, height: 2 });
       const tiles = [
-        { name: "a", top: 1, right: 0, bottom: 0, left: 0 },
-        { name: "b", top: 0, right: 0, bottom: 1, left: 0 },
-        { name: "c", top: 0, right: 0, bottom: 0, left: 0 }
+        { name: "a", sides: [1, 0, 0, 0] },
+        { name: "b", sides: [0, 0, 1, 0] },
+        { name: "c", sides: [0, 0, 0, 0] }
       ]
       const rng = seedrandom("test");
 
-      grid.fill({ tiles: tiles, rng: rng });
+      grid.fill({ tiles, rng });
 
       const x0y0 = grid.get(0, 0);
       expect(x0y0.value).to.deep.equal(tiles[1]);
       const x1y0 = grid.get(1, 0);
-      expect(x1y0.value).to.deep.equal(tiles[1]);
+      expect(x1y0.value).to.deep.equal(tiles[0]);
       const x0y1 = grid.get(0, 1);
       expect(x0y1.value).to.deep.equal(tiles[0]);
       const x1y1 = grid.get(1, 1);
-      expect(x1y1.value).to.deep.equal(tiles[0]);
+      expect(x1y1.value).to.deep.equal(tiles[1]);
+    });
+  });
+
+  describe("#shuffle", () => {
+    it("randomly rotates all of the Tiles", () => {
+      const grid = new Grid({ width: 2, height: 2 });
+      const tiles = [
+        { name: "a", sides: [1, 0, 0, 0] },
+        { name: "b", sides: [0, 0, 1, 0] },
+        { name: "c", sides: [0, 0, 0, 0] }
+      ]
+      const rng = seedrandom("test");
+      grid.fill({ tiles, rng });
+
+      grid.shuffle({ rng })
+
+      const x0y0 = grid.get(0, 0);
+      expect(x0y0.value.rotation).to.equal(3);
+      const x1y0 = grid.get(1, 0);
+      expect(x1y0.value.rotation).to.equal(1);
+      const x0y1 = grid.get(0, 1);
+      expect(x0y1.value.rotation).to.equal(1);
+      const x1y1 = grid.get(1, 1);
+      expect(x1y1.value.rotation).to.equal(3);
     });
   });
 });

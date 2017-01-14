@@ -35,6 +35,7 @@ class Game extends Component {
       tiles: this.tiles.all(),
       rng: this.rng
     });
+    this.grid.shuffle({ rng: this.rng });
   }
 
   render() {
