@@ -3,10 +3,14 @@
 "use strict";
 
 class Tile {
-  constructor({ top, right, bottom, left }) {
+  constructor({ name, top, right, bottom, left }) {
+    this.name = name;
     this.sides = [top, right, bottom, left];
     this.rotation = 0;
   }
+
+  get name() { return this._name; }
+  set name(value) { this._name = value; }
 
   get rotation() { return this._rotation; }
   set rotation(value) {
@@ -29,6 +33,16 @@ class Tile {
 
   get left() { return this._left; }
   set left(value) { this._left = value; }
+
+  clone() {
+    return new Tile({
+      name: this.name,
+      top: this.top,
+      right: this.right,
+      bottom: this.bottom,
+      left: this.left
+    });
+  }
 }
 
 export default Tile;
