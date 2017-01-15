@@ -34,10 +34,10 @@ class Game {
     this.grid.shuffle({ rng: this.rng });
   }
 
-  rotate(x, y) {
+  rotate(x, y, direction) {
     const space = this.grid.get(x, y);
     const tile = space.value;
-    tile.rotation = 1;
+    tile.rotation = direction;
   }
 
   toJSON() {

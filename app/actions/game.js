@@ -10,10 +10,11 @@ export const newGame = ({ seed }) => {
   }
 }
 
-export const rotateTile = (x, y) => {
+export const rotateTile = (x, y, direction) => {
   return {
     type: ROTATE_TILE,
     x: x,
-    y: y
+    y: y,
+    direction: direction
   }
 }

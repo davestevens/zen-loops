@@ -14,8 +14,8 @@ const newGame = (seed) => {
   return Object.assign({ inProgress: true }, game.toJSON());
 }
 
-const rotateTile = (x, y) => {
-  game.rotate(x, y);
+const rotateTile = (x, y, direction) => {
+  game.rotate(x, y, direction);
   return Object.assign({ inProgress: true }, game.toJSON());
 }
 
@@ -24,7 +24,7 @@ export default (state = defaultState, action) => {
   case NEW_GAME:
     return newGame(action.seed);
   case ROTATE_TILE:
-    return rotateTile(action.x, action.y);
+    return rotateTile(action.x, action.y, action.direction);
   default:
     return state;
   }

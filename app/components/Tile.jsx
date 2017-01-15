@@ -7,26 +7,28 @@ import { rotateTile } from "../actions/game";
 import classNames from "classnames";
 import "./Tile.scss";
 
-const ROTATIONS = {
-  "0-1": { from: "0", to: "90" },
-  "1-2": { from: "90", to: "180" },
-  "2-3": { from: "180", to: "270" },
-  "3-0": { from: "270", to: "360" }
-};
+const ROTATIONS = [0, 90, 180, 270];
 
 class Tile extends Component {
   componentWillUpdate(nextProps) {
     const { rotation } = this.props;
     const nextRotation = nextProps.rotation
-    const rotationAnimation = ROTATIONS[`${ rotation }-${ nextRotation }`];
-    if (!rotationAnimation) return;
+
+    let from = ROTATIONS[rotation];
+    let to = ROTATIONS[nextRotation];
+    if ((rotation > nextRotation) && (rotation == ROTATIONS.length - 1)) {
+      to = 360 - to;
+    }
+    else if ((rotation < nextRotation) && (nextRotation == ROTATIONS.length - 1)) {
+      from = 360 - from;
+    }
 
     const node = findDOMNode(this);
-    node.style.transform = `rotate(${ rotationAnimation.from }deg)`;
+    node.style.transform = `rotate(${ from }deg)`;
     node.style.transition = 'transform 0s';
 
     requestAnimationFrame(() => {
-      node.style.transform = `rotate(${ rotationAnimation.to }deg)`;
+      node.style.transform = `rotate(${ to }deg)`;
       node.style.transition = 'transform 0.2s';
     });
   }
@@ -43,14 +45,16 @@ class Tile extends Component {
     return (
       <div className={ classnames }
            style={ { top: size * y, left: size * x, width: size, height: size } }
-           onClick={ this._rotate.bind(this) }>
+           onClick={ this._rotate.bind(this, 1) }
+           onContextMenu={ this._rotate.bind(this, -1) }>
       </div>
     );
   }
 
-  _rotate() {
+  _rotate(direction, event) {
+    event.preventDefault();
     const { dispatch, x, y } = this.props;
-    dispatch(rotateTile(x, y));
+    dispatch(rotateTile(x, y, direction));
   }
 }
 
