@@ -19,14 +19,12 @@ class Tile {
       const max = this.sides.length;
       return ((value % max) + max) % max;
     }
-    const rotationBefore = this.rotation;
-    this._rotation = absMod(this.rotation + value);
-    const rotationAfter = this.rotation;
-    // TODO: do this before the absolute?
-    const rotationDiff = rotationAfter - rotationBefore;
-    const start = this.sides.slice(-rotationDiff);
+
+    const start = this.sides.slice(-value);
     const end = this.sides.slice(0, this.sides.length - start.length);
     this.sides = start.concat(end);
+
+    this._rotation = absMod(this.rotation + value);
   }
 
   clone() {
