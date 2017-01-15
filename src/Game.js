@@ -25,8 +25,8 @@ class Game {
 
   setup(seed) {
     this.seed = seed;
-    this.width = Math.floor(this.rng() * 6) + 6;
-    this.height = Math.floor(this.rng() * 10) + 6;
+    this.width = Math.floor(this.rng() * 3) + 6;
+    this.height = Math.floor(this.rng() * 6) + 6;
     this.grid = new Grid({ width: this.width, height: this.height });
     this.tiles = new Tiles({ tiles: TILES });
 
@@ -42,15 +42,16 @@ class Game {
 
   toJSON() {
     return {
-      width: this.width,
+      completed: this.grid.completed,
       height: this.height,
+      seed: this.seed,
       tiles: this.grid.spaces.map(space => ({
-        x: space.x,
-        y: space.y,
         kind: space.value.name,
-        rotation: space.value.rotation
+        rotation: space.value.rotation,
+        x: space.x,
+        y: space.y
       })),
-      completed: this.grid.completed
+      width: this.width
     }
   }
 }

@@ -3,13 +3,8 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import Tile from "../components/Tile.jsx";
+import GameCompleted from "../components/GameCompleted.jsx";
 import "./Game.scss";
-
-const GameCompleted = () => (
-  <div className="gamecompleted">
-    <div className="gamecompleted__inner">Completed</div>
-  </div>
-);
 
 class Game extends Component {
   render() {
@@ -28,17 +23,17 @@ class Game extends Component {
 
     return (
       <div className="layout"
-           style={ { width: width * tileSize, height: height * tileSize } } >
+           style={ { width: width * tileSize, height: height * tileSize, borderColor: "gray" } } >
         { this._renderTiles() }
       </div>
     );
   }
 
   _renderTiles() {
-    const { tileSize, tiles } = this.props;
+    const { seed, tileSize, tiles } = this.props;
 
     return tiles.map(tile => {
-      return <Tile key={ `tile-${ tile.x }-${ tile.y }` }
+      return <Tile key={ `tile-${ tile.x }-${ tile.y }-${ seed }` }
                    size={ tileSize }
                    { ...tile } />;
     });
@@ -48,6 +43,7 @@ class Game extends Component {
 Game.propTypes = {
   completed: PropTypes.bool.isRequired,
   height: PropTypes.number.isRequired,
+  seed: PropTypes.string.isRequired,
   tiles: PropTypes.array.isRequired,
   tileSize: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired
@@ -57,6 +53,7 @@ const mapStateToProps = (state) => ({
   width: state.game.width,
   height: state.game.height,
   completed: state.game.completed,
+  seed: state.game.seed,
   tiles: state.game.tiles
 });
 

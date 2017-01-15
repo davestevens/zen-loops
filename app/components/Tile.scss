@@ -1,109 +1,131 @@
+$line-width: 8px;
+
 .tile {
   width: 100%;
   height: 100%;
   position: absolute;
-  border: 1px solid black;
-  box-sizing: border-box;
-  /* transition: transform 0.3s; */
+  border-color: inherit;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:before {
+    display: table;
+    content: "";
+  }
+
+  &:after {
+    display: table;
+    content: "";
+  }
 
   &--empty {
   }
 
   &--end {
     &:before {
-      display: table;
-      content: "";
       height: 50%;
       position: absolute;
       top: 0;
-      left: calc(50% - 1px);
-      width: 2px;
-      background-color: red;
+      left: calc(50% - #{$line-width / 2});
+      border-left-width: $line-width;
+      border-left-style: solid;
+      border-color: inherit;
+    }
+
+    &:after {
+      width: $line-width;
+      height: $line-width;
+      position: absolute;
+      top: calc(50% - #{$line-width * 1.5});
+      left: calc(50% - #{$line-width * 1.5});
+      border-width: $line-width;
+      border-style: solid;
+      border-color: inherit;
+      border-radius: 50%;
+      background-color: white;
     }
   }
 
   &--corner {
     &:before {
-      display: table;
-      content: "";
-      height: 50%;
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
       position: absolute;
-      top: 0;
-      left: calc(50% - 1px);
-      width: 2px;
-      background-color: red;
-    }
-
-    &:after {
-      display: table;
-      content: "";
-      width: 50%;
-      position: absolute;
-      top: calc(50% - 1px);
-      left: 50%;
-      height: 2px;
-      background-color: red;
+      top: calc(-50% + #{$line-width / 2});
+      left: calc(50% - #{$line-width / 2});
+      border-width: $line-width;
+      border-style: solid;
+      border-color: inherit;
+      border-radius: 45%;
     }
   }
 
   &--straight {
     &:before {
-      display: table;
-      content: "";
       height: 100%;
       position: absolute;
       top: 0;
-      left: calc(50% - 1px);
-      width: 2px;
-      background-color: red;
+      left: calc(50% - #{$line-width / 2});
+      border-left-width: $line-width;
+      border-left-style: solid;
+      border-color: inherit;
     }
   }
 
   &--fork {
     &:before {
-      display: table;
-      content: "";
       height: 100%;
+      width: 100%;
+      box-sizing: border-box;
       position: absolute;
-      top: 0;
-      left: calc(50% - 1px);
-      width: 2px;
-      background-color: red;
+      top: calc(-50% + #{$line-width / 2});
+      left: calc(50% - #{$line-width / 2});
+      border-width: $line-width;
+      border-style: solid;
+      border-color: inherit;
+      border-radius: 45%;
     }
 
     &:after {
-      display: table;
-      content: "";
-      width: 50%;
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
       position: absolute;
-      top: calc(50% - 1px);
-      left: 50%;
-      height: 2px;
-      background-color: red;
+      top: calc(50% - #{$line-width / 2});
+      left: calc(50% - #{$line-width / 2});
+      border-width: $line-width;
+      border-style: solid;
+      border-color: inherit;
+      border-radius: 45%;
     }
   }
 
   &--cross {
     &:before {
-      display: table;
-      content: "";
       height: 100%;
+      width: 100%;
+      box-sizing: border-box;
       position: absolute;
-      top: 0;
-      left: calc(50% - 1px);
-      width: 2px;
-      background-color: red;
+      top: calc(-50% + #{$line-width / 2});
+      left: calc(50% - #{$line-width / 2});
+      border-width: $line-width;
+      border-style: solid;
+      border-color: inherit;
+      border-radius: 45%;
     }
 
     &:after {
-      display: table;
-      content: "";
+      height: 100%;
       width: 100%;
+      box-sizing: border-box;
       position: absolute;
-      top: calc(50% - 1px);
-      left: 0;
-      height: 2px;
-      background-color: red;
+      top: calc(50% - #{$line-width / 2});
+      left: calc(-50% + #{$line-width / 2});
+      border-width: $line-width;
+      border-style: solid;
+      border-color: inherit;
+      border-radius: 45%;
     }
   }
 

@@ -3,7 +3,7 @@
 export const NEW_GAME = "NEW_GAME";
 export const ROTATE_TILE = "ROTATE_TILE";
 
-export const newGame = (seed) => {
+export const newGame = ({ seed }) => {
   return {
     type: NEW_GAME,
     seed: seed

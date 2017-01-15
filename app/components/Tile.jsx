@@ -19,14 +19,15 @@ class Tile extends Component {
     const { rotation } = this.props;
     const nextRotation = nextProps.rotation
     const rotationAnimation = ROTATIONS[`${ rotation }-${ nextRotation }`];
-    const node = findDOMNode(this);
+    if (!rotationAnimation) return;
 
+    const node = findDOMNode(this);
     node.style.transform = `rotate(${ rotationAnimation.from }deg)`;
     node.style.transition = 'transform 0s';
 
     requestAnimationFrame(() => {
       node.style.transform = `rotate(${ rotationAnimation.to }deg)`;
-      node.style.transition = 'transform 0.3s';
+      node.style.transition = 'transform 0.2s';
     });
   }
 

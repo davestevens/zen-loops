@@ -7,6 +7,7 @@ module.exports = {
   devtool: "cheap-module-eval-source-map",
   entry: [
     "webpack/hot/dev-server",
+    "babel-polyfill",
     "./app/main.jsx"
   ],
   output: {
@@ -26,7 +27,7 @@ module.exports = {
       include: __dirname
     }, {
       test: /\.scss?$/,
-      loaders: [ "style", "css", "sass" ],
+      loaders: [ "style", "css", "autoprefixer", "sass" ],
       include: __dirname
     }]
   }

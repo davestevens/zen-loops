@@ -4,19 +4,15 @@ import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import { newGame } from "../actions/game";
 import Game from "./Game.jsx";
+import NewGame from "../components/NewGame.jsx";
+import "./App.scss";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this._newGame = this._newGame.bind(this);
-  }
-
   componentWillMount() {
     const { dispatch } = this.props;
 
     if (window.location && window.location.hash) {
-      dispatch(newGame(window.location.hash));
+      dispatch(newGame({ seed: window.location.hash }));
     }
   }
 
@@ -25,33 +21,17 @@ class App extends Component {
     const { inProgress } = game;
 
     return (
-      <div>
-        <h1>Zen Loops</h1>
+      <div className="app">
         { inProgress && this._game() }
-        { inProgress || this._newGameButton() }
+        { inProgress || <NewGame /> }
       </div>
-    );
-  }
-
-  _newGameButton() {
-    return (
-      <button onClick={ this._newGame }>
-        New Game
-      </button>
     );
   }
 
   _game() {
     return (
-      <Game width={ 4 }
-            height={ 4 }
-            tileSize={ 80 } />
+      <Game tileSize={ 40 } />
     );
-  }
-
-  _newGame() {
-    const { dispatch } = this.props;
-    dispatch(newGame());
   }
 }
 
