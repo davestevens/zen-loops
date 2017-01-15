@@ -6,21 +6,26 @@ describe("correctTile", () => {
   context("when all of the Tile's ends are joined", () => {
     const correctTilePositions = [
       {
-        tile: { top: 0, right: 0, bottom: 0, left: 0 },
-        surrounding: { }
+        tile: { sides: [0, 0, 0, 0] },
+        surrounding: [null, null, null, null]
       },
       {
-        tile: { top: 0, right: 1, bottom: 0, left: 0 },
-        surrounding: { right: { left: 1 } }
+        tile: { sides: [0, 1, 0, 0] },
+        surrounding: [
+          null,
+          { sides: [0, 0, 0, 1] },
+          null,
+          null
+        ]
       },
       {
-        tile: { top: 1, right: 1, bottom: 1, left: 1 },
-        surrounding: {
-          above: { bottom: 1 },
-          right: { left: 1 },
-          below: { top: 1 },
-          left: { right: 1 }
-        }
+        tile: { sides: [1, 1, 1, 1] },
+        surrounding: [
+          { sides: [0, 0, 1, 0] },
+          { sides: [0, 0, 0, 1] },
+          { sides: [1, 0, 0, 0] },
+          { sides: [0, 1, 0, 0] }
+        ]
       }
     ];
 
@@ -36,21 +41,31 @@ describe("correctTile", () => {
   context("when any of the Tile's ends are not joined", () => {
     const incorrectTilePositions = [
       {
-        tile: { top: 0, right: 0, bottom: 0, left: 0 },
-        surrounding: { above: { bottom: 1 } }
+        tile: { sides: [0, 0, 0, 0] },
+        surrounding: [
+          { sides: [0, 0, 1, 0] },
+          null,
+          null,
+          null
+        ]
       },
       {
-        tile: { top: 0, right: 1, bottom: 0, left: 0 },
-        surrounding: { right: { left: 0 } }
+        tile: { sides: [0, 1, 0, 0] },
+        surrounding: [
+          null,
+          { sides: [0, 0, 0, 0] },
+          null,
+          null
+        ]
       },
       {
-        tile: { top: 1, right: 1, bottom: 1, left: 1 },
-        surrounding: {
-          above: { bottom: 0 },
-          right: { left: 1 },
-          below: { top: 1 },
-          left: { right: 0 }
-        }
+        tile: { sides: [1, 1, 1, 1] },
+        surrounding: [
+          { sides: [0, 0, 0, 0] },
+          { sides: [0, 0, 0, 1] },
+          { sides: [1, 0, 0, 0] },
+          { sides: [0, 0, 0, 0] }
+        ]
       }
     ];
 

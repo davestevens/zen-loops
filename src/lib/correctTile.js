@@ -15,10 +15,9 @@ const correctSide = (side, tile) => {
 
 const correctTile = ({ tile, surrounding }) => {
   const sides = calculateSides(surrounding);
-  return correctSide(sides.top, tile.top)
-    && correctSide(sides.right, tile.right)
-    && correctSide(sides.bottom, tile.bottom)
-    && correctSide(sides.left, tile.left);
+  return sides.reduce((memo, side, index) => {
+    return memo && correctSide(side, tile.sides[index]);
+  }, true);
 }
 
 export default correctTile;

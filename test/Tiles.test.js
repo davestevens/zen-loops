@@ -10,10 +10,7 @@ describe("Tiles", () => {
     expect(tiles.list).to.have.length(1);
     const tile = tiles.list[0];
     expect(tile.name).to.equal("example");
-    expect(tile.top).to.equal(0);
-    expect(tile.right).to.equal(1);
-    expect(tile.bottom).to.equal(2);
-    expect(tile.left).to.equal(3);
+    expect(tile.sides).to.deep.equal([0, 1, 2, 3]);
   });
 
   describe("#all", () => {

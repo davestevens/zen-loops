@@ -16,10 +16,9 @@ const possibleSide = (side, tile) => {
 }
 
 const possibleTile = ({ sides, tile }) => {
-  return possibleSide(sides.top, tile.top)
-    && possibleSide(sides.right, tile.right)
-    && possibleSide(sides.bottom, tile.bottom)
-    && possibleSide(sides.left, tile.left);
+  return sides.reduce((memo, side, index) => {
+    return memo && possibleSide(side, tile.sides[index]);
+  }, true);
 }
 
 export default possibleTile;

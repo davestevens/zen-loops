@@ -4,8 +4,7 @@ import shuffleArray from "./lib/shuffleArray";
 import calculatePossibleTiles from "./lib/calculatePossibleTiles";
 import randomFromArray from "./lib/randomFromArray";
 import correctTile from "./lib/correctTile";
-
-export const OUT_OF_BOUNDS = "OUT_OF_BOUNDS";
+import surroundingSpaces, { OUT_OF_BOUNDS } from "./lib/surroundingSpaces";
 
 class Grid {
   constructor({ width, height } = {}) {
@@ -44,7 +43,7 @@ class Grid {
     let shuffledSpaces = shuffleArray(this.spaces, rng);
     while(shuffledSpaces.length) {
       const space = shuffledSpaces.shift();
-      const surrounding = this._surroundingSpaces(space);
+      const surrounding = this.surroundingSpaces(space);
       const possibilities = calculatePossibleTiles({ all: tiles, surrounding });
       const tile = randomFromArray(possibilities, rng);
 
@@ -62,23 +61,13 @@ class Grid {
 
   get completed() {
     return this.spaces.reduce((memo, space) => {
-      const surrounding = this._surroundingSpaces(space);
+      const surrounding = this.surroundingSpaces(space);
       return memo && correctTile({ tile: space.value, surrounding });
     }, true);
   }
 
-  _surroundingSpaces({ x, y }) {
-    const value = (x, y) => {
-      const space = this.get(x, y);
-      return space == OUT_OF_BOUNDS ? OUT_OF_BOUNDS : space.value;
-    }
-
-    return {
-      above: value(x,     y - 1),
-      right: value(x + 1, y    ),
-      below: value(x,     y + 1),
-      left:  value(x - 1, y    )
-    };
+  surroundingSpaces({ x, y }) {
+    return surroundingSpaces({ x, y, get: this.get.bind(this) });
   }
 }
 

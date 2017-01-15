@@ -1,7 +1,8 @@
 "use strict";
 
-import Grid, { OUT_OF_BOUNDS } from "../src/Grid";
+import Grid from "../src/Grid";
 import Tile from "../src/Tile";
+import { OUT_OF_BOUNDS } from "../src/lib/surroundingSpaces";
 import seedrandom from "seedrandom";
 
 describe("Grid", () => {
@@ -130,9 +131,9 @@ describe("Grid", () => {
 const gridSetup = () => {
   const grid = new Grid({ width: 2, height: 2 });
   const tiles = [
-    new Tile({ name: "a", top: 1, right: 0, bottom: 0, left: 0 }),
-    new Tile({ name: "b", top: 0, right: 0, bottom: 1, left: 0 }),
-    new Tile({ name: "c", top: 0, right: 0, bottom: 0, left: 0 })
+    new Tile({ name: "a", sides: [1, 0, 0, 0] }),
+    new Tile({ name: "b", sides: [0, 0, 1, 0] }),
+    new Tile({ name: "c", sides: [0, 0, 0, 0] })
   ]
   const rng = seedrandom("test");
 

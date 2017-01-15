@@ -3,26 +3,16 @@
 import Tile from "./Tile";
 
 class Tiles {
-  constructor({ tiles }) {
-    this.list = tiles.map(tile => {
-      return new Tile({
-        name: tile.name,
-        top: tile.sides[0],
-        right: tile.sides[1],
-        bottom: tile.sides[2],
-        left: tile.sides[3]
-      });
-    });
+  constructor({ tiles, tileClass = Tile }) {
+    this.tileClass = tileClass;
+    this.list = tiles;
   }
 
   get list() { return this._list; }
   set list(value) {
-    this._list = value.map(tile => new Tile({
+    this._list = value.map(tile => new this.tileClass({
       name: tile.name,
-      top: tile.sides[0],
-      right: tile.sides[1],
-      bottom: tile.sides[2],
-      left: tile.sides[3]
+      sides: tile.sides
     }));
   }
 

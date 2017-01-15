@@ -3,6 +3,7 @@
 import seedrandom from "seedrandom";
 import Grid from "./Grid";
 import Tiles from "./Tiles";
+import Tile from "./Tile";
 
 const TILES = [
   { name: "empty",    sides: [0, 0, 0, 0] },
@@ -28,7 +29,7 @@ class Game {
     this.width = Math.floor(this.rng() * 3) + 6;
     this.height = Math.floor(this.rng() * 6) + 6;
     this.grid = new Grid({ width: this.width, height: this.height });
-    this.tiles = new Tiles({ tiles: TILES });
+    this.tiles = new Tiles({ tiles: TILES, tileClass: Tile });
 
     this.grid.fill({ tiles: this.tiles.all(), rng: this.rng });
     this.grid.shuffle({ rng: this.rng });
