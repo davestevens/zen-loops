@@ -49,7 +49,8 @@ class Game {
         y: space.y,
         kind: space.value.name,
         rotation: space.value.rotation
-      }))
+      })),
+      completed: this.grid.completed
     }
   }
 }

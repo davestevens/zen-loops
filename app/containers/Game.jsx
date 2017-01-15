@@ -5,10 +5,19 @@ import { connect } from "react-redux";
 import Tile from "../components/Tile.jsx";
 import "./Game.scss";
 
+const GameCompleted = () => (
+  <div className="gamecompleted">
+    <div className="gamecompleted__inner">Completed</div>
+  </div>
+);
+
 class Game extends Component {
   render() {
+    const { completed } = this.props;
+
     return (
       <div className="game">
+        { completed && <GameCompleted /> }
         { this.renderLayout() }
       </div>
     );
@@ -37,6 +46,7 @@ class Game extends Component {
 }
 
 Game.propTypes = {
+  completed: PropTypes.bool.isRequired,
   height: PropTypes.number.isRequired,
   tiles: PropTypes.array.isRequired,
   tileSize: PropTypes.number.isRequired,
@@ -46,6 +56,7 @@ Game.propTypes = {
 const mapStateToProps = (state) => ({
   width: state.game.width,
   height: state.game.height,
+  completed: state.game.completed,
   tiles: state.game.tiles
 });
 

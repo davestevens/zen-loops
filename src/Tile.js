@@ -1,10 +1,10 @@
 "use strict";
 
 class Tile {
-  constructor({ name, top, right, bottom, left }) {
+  constructor({ name, top, right, bottom, left, sides, rotation = 0 }) {
     this.name = name;
-    this.sides = [top, right, bottom, left];
-    this.rotation = 0;
+    this.sides = sides || [top, right, bottom, left];
+    this.rotation = rotation;
   }
 
   get name() { return this._name; }
@@ -38,10 +38,8 @@ class Tile {
   clone() {
     return new Tile({
       name: this.name,
-      top: this.top,
-      right: this.right,
-      bottom: this.bottom,
-      left: this.left
+      sides: this.sides,
+      rotation: this.rotation
     });
   }
 }

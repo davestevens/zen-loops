@@ -3,6 +3,7 @@
 import shuffleArray from "./lib/shuffleArray";
 import calculatePossibleTiles from "./lib/calculatePossibleTiles";
 import randomFromArray from "./lib/randomFromArray";
+import correctTile from "./lib/correctTile";
 
 export const OUT_OF_BOUNDS = "OUT_OF_BOUNDS";
 
@@ -57,6 +58,13 @@ class Grid {
       const tile = space.value;
       tile.rotation = Math.floor(rng() * tile.sides.length);
     });
+  }
+
+  get completed() {
+    return this.spaces.reduce((memo, space) => {
+      const surrounding = this._surroundingSpaces(space);
+      return memo && correctTile({ tile: space.value, surrounding });
+    }, true);
   }
 
   _surroundingSpaces({ x, y }) {
