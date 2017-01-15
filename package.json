@@ -4,7 +4,10 @@
   "description": "Implementation of 'Loops of Zen'.",
   "scripts": {
     "start": "webpack-dev-server --inline --hot --content-base build",
-    "test": "mocha --recursive --compilers js:babel-core/register"
+    "test": "mocha --recursive --compilers js:babel-core/register",
+    "build": "NODE_ENV=production webpack -p --config webpack.config.prod.js",
+    "commit-bundle": "if [[ -n $(git status build --porcelain) ]]; then git add -A build && git commit -m 'Includes bundle.'; fi",
+    "preversion": "npm run build && npm run commit-bundle"
   },
   "author": "Dave Stevens <dave@dstvns.co.uk>",
   "license": "ISC",
