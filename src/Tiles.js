@@ -1,6 +1,7 @@
 "use strict";
 
 import Tile from "./Tile";
+import _ from "lodash";
 
 class Tiles {
   constructor({ tiles }) {
@@ -25,7 +26,7 @@ class Tiles {
         all.push(clonedTile);
       }
     });
-    return all;
+    return _.uniqWith(all, (a, b) => _.isEqual(a.sides, b.sides));
   }
 }
 
