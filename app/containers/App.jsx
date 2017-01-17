@@ -12,7 +12,7 @@ class App extends Component {
     const { dispatch } = this.props;
 
     if (window.location && window.location.hash) {
-      dispatch(newGame({ seed: window.location.hash }));
+      dispatch(newGame({ seed: window.location.hash.substr(1) }));
     }
   }
 
