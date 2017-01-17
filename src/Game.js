@@ -29,6 +29,7 @@ class Game {
     this.height = Math.floor(this.rng() * 6) + 6;
     this.grid = new Grid({ width: this.width, height: this.height });
     this.tiles = new Tiles({ tiles: TILES });
+    this.color = Math.floor(this.rng() * 180);
 
     this.grid.fill({ tiles: this.tiles.all(), rng: this.rng });
     this.grid.shuffle({ rng: this.rng });
@@ -42,6 +43,7 @@ class Game {
 
   toJSON() {
     return {
+      color: this.color,
       completed: this.grid.completed,
       height: this.height,
       seed: this.seed,

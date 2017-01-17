@@ -19,14 +19,27 @@ class Game extends Component {
   }
 
   renderLayout() {
-    const { height, tileSize, width } = this.props;
-
     return (
       <div className="layout"
-           style={ { width: width * tileSize, height: height * tileSize, borderColor: "gray" } } >
+           style={ this._style() } >
         { this._renderTiles() }
       </div>
     );
+  }
+
+  _color() {
+    const { color } = this.props;
+    return `hsl(${ color }, 80%, 70%)`
+  }
+
+  _style() {
+    const { height, tileSize, width } = this.props;
+
+    return {
+      width: width * tileSize,
+      height: height * tileSize,
+      borderColor: this._color()
+    };
   }
 
   _renderTiles() {
@@ -41,6 +54,7 @@ class Game extends Component {
 }
 
 Game.propTypes = {
+  color: PropTypes.number.isRequired,
   completed: PropTypes.bool.isRequired,
   height: PropTypes.number.isRequired,
   seed: PropTypes.string.isRequired,
@@ -50,11 +64,12 @@ Game.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  width: state.game.width,
-  height: state.game.height,
+  color: state.game.color,
   completed: state.game.completed,
+  height: state.game.height,
   seed: state.game.seed,
-  tiles: state.game.tiles
+  tiles: state.game.tiles,
+  width: state.game.width
 });
 
 export default connect(

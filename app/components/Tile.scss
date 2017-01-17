@@ -52,7 +52,7 @@ $rotation-animations: (
 
   &--end {
     &:before {
-      height: 50%;
+      height: 25%;
       position: absolute;
       top: 0;
       left: calc(50% - #{$line-width / 2});
@@ -71,7 +71,6 @@ $rotation-animations: (
       border-style: solid;
       border-color: inherit;
       border-radius: 50%;
-      background-color: white;
     }
   }
 

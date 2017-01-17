@@ -17,15 +17,20 @@ class App extends Component {
   }
 
   render() {
-    const { game } = this.props;
-    const { inProgress } = game;
+    const { inProgress } = this.props;
 
     return (
-      <div className="app">
+      <div className="app" style={ { backgroundColor: this._backgroundColor() } }>
         { inProgress && this._game() }
         { inProgress || <NewGame /> }
       </div>
     );
+  }
+
+  _backgroundColor() {
+    const { color } = this.props;
+    const altColor = (color + 180) % 360;
+    return `hsla(${ altColor }, 70%, 60%, 0.8)`
   }
 
   _game() {
@@ -37,12 +42,17 @@ class App extends Component {
 
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  game: PropTypes.object.isRequired
+  inProgress: PropTypes.bool.isRequired,
+  color: PropTypes.number.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  game: state.game
-});
+const mapStateToProps = (state) => {
+  const game = state.game || {};
+  return {
+    inProgress: !!game.inProgress,
+    color: game.color || 0
+  }
+};
 
 export default connect(
   mapStateToProps
