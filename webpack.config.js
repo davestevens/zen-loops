@@ -2,33 +2,64 @@
 
 const path = require("path");
 const webpack = require("webpack")
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   devtool: "cheap-module-eval-source-map",
-  entry: [
-    "webpack/hot/dev-server",
-    "babel-polyfill",
-    "./app/main.jsx"
-  ],
+  entry: {
+    "bundle": [
+      "babel-polyfill",
+      "./app/main.jsx"
+    ]
+  },
   output: {
     path: path.join(__dirname, "build"),
     publicPath: "/",
     filename: "bundle.js"
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new HtmlWebpackPlugin({
+      template: "app/index.html"
+    })
   ],
   module: {
-    loaders: [{
+    rules: [{
       test: /\.jsx?$/,
-      loaders: [ "babel" ],
+      use: [ "babel-loader" ],
       exclude: /node_modules/,
       include: __dirname
     }, {
       test: /\.scss?$/,
-      loaders: [ "style", "css", "autoprefixer", "sass" ],
+      use: [ "style-loader", "css-loader", "autoprefixer-loader", "sass-loader" ],
       include: __dirname
+    }, {
+      test: /manifest.json$/,
+      use: ["file-loader?name=manifest.json", "web-app-manifest-loader"],
+      include: __dirname
+    }, {
+      test: /\.(jpe?g|png|gif)$/i,
+      loaders: ["file-loader?context=src/images&name=images/[path][name].[ext]", {
+        loader: "image-webpack-loader",
+        query: {
+          mozjpeg: {
+            progressive: true,
+          },
+          gifsicle: {
+            interlaced: false,
+          },
+          optipng: {
+            optimizationLevel: 4,
+          },
+          pngquant: {
+            quality: "75-90",
+            speed: 3,
+          },
+        },
+      }],
+      exclude: /node_modules/,
+      include: __dirname,
     }]
   }
 }
