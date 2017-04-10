@@ -5,8 +5,9 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import store from "./stores/configureStore";
 import App from "./containers/App.jsx";
-import "offline-plugin/runtime";
 import "./manifest.json";
+import * as OfflinePluginRuntime from "offline-plugin/runtime";
+OfflinePluginRuntime.install();
 
 render(
   <Provider store={ store }>

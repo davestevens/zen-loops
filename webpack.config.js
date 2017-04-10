@@ -3,6 +3,7 @@
 const path = require("path");
 const webpack = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const OfflinePlugin = require("offline-plugin");
 
 module.exports = {
   devtool: "cheap-module-eval-source-map",
@@ -22,6 +23,26 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: "app/index.html"
+    }),
+    new OfflinePlugin({
+      safeToUseOptionalCaches: true,
+
+      caches: {
+        main: [
+          "bundle.js",
+          "index.html"
+        ],
+        optional: [
+          ":rest:"
+        ]
+      },
+
+      ServiceWorker: {
+        events: true
+      },
+      AppCache: {
+        events: true
+      }
     })
   ],
   module: {
