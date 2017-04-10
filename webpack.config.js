@@ -61,7 +61,7 @@ module.exports = {
       include: __dirname
     }, {
       test: /\.(jpe?g|png|gif)$/i,
-      loaders: ["file-loader?context=src/images&name=images/[path][name].[ext]", {
+      loaders: ["file-loader?context=app/assets&name=images/[path][name].[ext]", {
         loader: "image-webpack-loader",
         query: {
           mozjpeg: {
