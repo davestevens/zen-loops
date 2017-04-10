@@ -31,7 +31,7 @@ module.exports = {
 
       caches: {
         main: [
-          "bundle.js",
+          "bundle.[hash].js",
           "index.html"
         ],
         optional: [
