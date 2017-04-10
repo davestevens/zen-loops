@@ -21,7 +21,7 @@ class NewGame extends Component {
 
   _new() {
     const { dispatch } = this.props;
-    const seed = Math.random().toString(36).substring(16);
+    const seed = Math.random().toString(36);
     window.location.hash = seed;
     dispatch(newGame({ seed }));
   }
